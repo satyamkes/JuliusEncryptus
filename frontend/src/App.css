@@ -1,0 +1,34 @@
+*{
+  box-sizing: border-box;
+  font-family: "Funnel Display", sans-serif;
+  font-optical-sizing: auto;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  text-align: center;
+}
+
+.container {
+  display: block;
+  width: 100%;
+  padding-inline: var(--padding);
+}
+
+.active{
+  height: 320px;
+  width: 100%;
+  padding: var(--padding);
+}
+
+.display{
+  max-height: 0;
+  display: none;
+}
+
+#submit:hover{
+  cursor: pointer;
+}
+
