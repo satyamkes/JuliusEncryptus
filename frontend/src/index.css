@@ -31,6 +31,12 @@ body {
   min-height: 100vh;
 }
 
+textarea, textarea:focus, textarea:focus-visible, textarea:hover, textarea:active, textarea:focus-within, textarea:visited, textarea:target{
+  border: none;
+  outline: none;
+  resize: none;
+}
+
 input, input:focus, input:focus-visible, input:hover, input:active, input:focus-within, input:visited, input:target{
   border: none;
   outline: none;

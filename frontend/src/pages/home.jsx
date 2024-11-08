@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import DropMenu from "../components/dropmenu";
 import Error from "../components/error";
 import axios from "axios";
 import Chart from "chart.js/auto";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const style = {
   grid: {
@@ -93,6 +95,9 @@ export default function Home() {
   const [text, setText] = useState("");
   const [response, setResponse] = useState(null);
   const [err, setErr] = useState(null);
+  const [fetch, setFetch] = useState(false);
+
+  let formRef = useRef(null);
 
   useEffect(() => {
     Object.keys(Chart.instances).forEach((chartId) => {
@@ -186,18 +191,20 @@ export default function Home() {
       {err ? <Error err={err} /> : null}
       <section
         style={{
-          height: "100vh",
+          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           background:
             "linear-gradient(90deg, #3C3C3C  1px, transparent 1px) 0 0, linear-gradient(180deg, #3C3C3C  1px, transparent 1px) 0 0",
-          backgroundSize: "10em 10em",
+          backgroundSize: "60px 60px",
           border: "1px solid #3C3C3C",
           boxShadow:
             "4px 4px 0 black, 6px 6px 0 rgba(0, 0, 0, 0.8), 8px 8px 0 rgba(0, 0, 0, 0.6)",
+          paddingBlock: "var(--padding)",
         }}
+        className="container"
       >
         <div style={style.grid}>
           <div
@@ -211,19 +218,30 @@ export default function Home() {
             }}
           >
             <form
+              method=""
               action=""
-              method="POST"
               onSubmit={(event) => {
-                axios
-                  .post(import.meta.env.VITE_api_url, {
+                setFetch(true);
+                setResponse([[], []]);
+                axios({
+                  method: 'post',
+                  url: import.meta.env.VITE_api_url,
+                  timeout: '10000',
+                  data: {
                     cipher: text,
-                  })
+                  },
+                })
                   .then((res) => {
+                    setTimeout(setFetch(false), 2000);
                     setResponse(res.data.body);
                   })
-                  .catch((err) => setErr(err));
+                  .catch((err) => {
+                    setErr(err);
+                    setFetch(false);
+                  });
                 event.preventDefault();
               }}
+              ref={formRef}
             >
               <div
                 className="container"
@@ -236,7 +254,33 @@ export default function Home() {
                     position: "relative",
                   }}
                 >
-                  <input
+                  {fetch ? (
+                    <div
+                      style={{
+                        position: "absolute",
+                        height: "100%",
+                        width: "100%",
+                        backgroundColor: "#242424",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <div
+                        style={{
+                          height: "50%",
+                          aspectRatio: "1/1",
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faSpinner}
+                          className="spinner"
+                          style={{ height: "100%", fontWeight: "lighter" }}
+                        />
+                      </div>
+                    </div>
+                  ) : null}
+                  <textarea
                     type="text"
                     name="cipher"
                     id="cipher"
@@ -249,12 +293,15 @@ export default function Home() {
                       backgroundColor: "#242424",
                       border: "none",
                       padding: "var(--padding)",
-                      textAlign: "center",
                       color: "#f5f5f5",
                       fontSize: "1rem",
                       fontWeight: 900,
+                      textAlign: "left",
                     }}
                     value={text}
+                    placeholder="Enter Your Cipher Here...."
+                    autoComplete="off"
+                    spellCheck="false"
                   />
 
                   <div
@@ -262,23 +309,27 @@ export default function Home() {
                       display: "block",
                       width: "100%",
                       position: "absolute",
-                      bottom: "0",
+                      bottom: 0,
                     }}
                   >
-                    <input
-                      type="submit"
-                      value="Submit 📝"
-                      style={{
-                        width: "100%",
-                        backgroundColor: "transparent",
-                        border: "none",
-                        color: "#f5f5f5",
-                        padding: "var(--padding)",
-                        fontSize: "1.05rem",
-                        fontWeight: 700,
-                      }}
-                      id="submit"
-                    />
+                    {!fetch ? (
+                      <button
+                        style={{
+                          backgroundColor: "transparent",
+                          border: "none",
+                          display: "block",
+                          width: "100%",
+                          textAlign: "end",
+                          borderTop: "1px solid #f5f5f5",
+                        }}
+                      >
+                        <FontAwesomeIcon
+                          icon={faArrowRight}
+                          color={"#f5f5f5"}
+                          size="2x"
+                        />
+                      </button>
+                    ) : null}
                   </div>
                 </div>
               </div>

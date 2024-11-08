@@ -16,7 +16,7 @@ export default function DropDown(props) {
       <div
         style={{
           width: "100%",
-          backgroundColor: "#f5f5f5"
+          borderRadius: "24px",
         }}
         ref={holderRef}
       >
@@ -29,7 +29,8 @@ export default function DropDown(props) {
             backgroundColor: strokeClr,
             border: `1px solid ${clr}`,
             padding: "var(--padding)",
-            margin: 0
+            margin: 0,
+            borderRadius: "24px",
           }}
           className="container"
           onClick={() => {
@@ -37,7 +38,7 @@ export default function DropDown(props) {
             display.classList.toggle("display");
             display.classList.toggle("active");
 
-            setIsActive(prev => !prev);
+            setIsActive((prev) => !prev);
           }}
         >
           <button
@@ -47,20 +48,26 @@ export default function DropDown(props) {
               color: clr,
             }}
           >
-            {!isActive ? <FontAwesomeIcon icon={faPlus} size="2x" /> : <FontAwesomeIcon icon={faMinus} size="2x"/>}
+            {!isActive ? (
+              <FontAwesomeIcon icon={faPlus} size="2x" />
+            ) : (
+              <FontAwesomeIcon icon={faMinus} size="2x" />
+            )}
           </button>
         </div>
-        <p
+        <pre
           className="display"
           ref={displayRef}
           style={{
             color: clr,
             backgroundColor: strokeClr,
-            margin: 0
+            borderRadius: "24px",
+            margin: 0,
+            overflow: 'scroll'
           }}
         >
           {val}
-        </p>
+        </pre>
       </div>
     </>
   );
