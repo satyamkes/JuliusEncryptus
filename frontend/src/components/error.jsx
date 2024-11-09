@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRotateRight, faKeyboard } from "@fortawesome/free-solid-svg-icons";
-import errorImg from "../assets/error.svg";
 import { useEffect } from "react";
 export default function Error(props) {
   let err = props.err;
