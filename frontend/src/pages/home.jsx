@@ -1,6 +1,7 @@
 import { Typewriter } from "react-simple-typewriter";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 const style = {
   gridItem: {
     width: "100%",
@@ -82,6 +83,7 @@ export default function Home() {
               borderRadius: "24px",
               border: "1px solid #f5f5f5",
               position: "relative",
+              display: "flex",
             }}
             className="container"
           >
@@ -104,9 +106,17 @@ export default function Home() {
               style={{
                 height: "50%",
                 overflowY: "scroll",
+                position: "absolute",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
               }}
             >
-              je;jjaslc sanclnsalc asnclnsaln clnaslnc clnsalcnl
+              Our mission is to decrypt and analyze messages encrypted by the
+              use of a <b>Caesar cipher</b> to uncover any relevant insights
+              that can inform and strengthen our security measures.
             </p>
 
             <Link
@@ -137,6 +147,7 @@ export default function Home() {
         style={{
           border: "1px solid #3c3c3c",
         }}
+        id="about"
       >
         <div className="top-triangle">
           <svg
@@ -161,7 +172,6 @@ export default function Home() {
             gridTemplateColumns: "repeat(auto-fit, 400px)",
             justifyContent: "center",
           }}
-          id="about"
         >
           <div
             style={{
@@ -193,9 +203,55 @@ export default function Home() {
                 height: "100%",
                 width: "100%",
                 textAlign: "left",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#f5f5f5",
               }}
               className="container"
-            ></p>
+            >
+              <b
+                style={{
+                  borderBottom: "1px solid #f5f5f5",
+                  fontSize: '1.2rem'
+                }}
+              >
+                Team Members
+              </b>
+              <a
+                href="https://www.linkedin.com/in/satyam-kumar-kesarwani-763b61293/"
+                style={{
+                  color: "#f5f5f5",
+                }}
+              >
+                <b>Satyam Kesarwani</b>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/nikunj-chauhan-9781832b2/"
+                style={{
+                  color: "#f5f5f5",
+                }}
+              >
+                Nikunj Chauhan
+              </a>
+              <a
+                href="https://www.linkedin.com/in/sarafaraj-nasardi-7722b31b3/"
+                style={{
+                  color: "#f5f5f5",
+                }}
+              >
+                Sarafaraj Nasardi
+              </a>
+              <a
+                href="https://www.linkedin.com/in/vidhi-mittal04/"
+                style={{
+                  color: "#f5f5f5",
+                }}
+              >
+                Vidhi Mittal
+              </a>
+            </p>
           </div>
         </div>
 

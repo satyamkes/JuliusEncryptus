@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import {
   faCircleInfo,
   faBars,
@@ -13,6 +13,7 @@ import { Outlet, Link } from "react-router-dom";
 import Header from "../components/header";
 import Footer from "../components/footer";
 
+import { HashLink } from "react-router-hash-link";
 export default function Layout() {
   let menuRef = useRef(null);
   let [mActive, setMActive] = useState(false);
@@ -75,9 +76,9 @@ export default function Layout() {
             <Link to="/decoder">
               Decode <FontAwesomeIcon icon={faPuzzlePiece} />
             </Link>
-            <a href="/#about">
+            <HashLink to="/#about">
               About Us <FontAwesomeIcon icon={faUser} />
-            </a>
+            </HashLink>
           </div>
         </div>
         <a
